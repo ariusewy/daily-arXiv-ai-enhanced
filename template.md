@@ -4,7 +4,7 @@ This tool will daily crawl https://arxiv.org and use LLMs to summarize them.
 See in: https://dw-dengwei.github.io/daily-arXiv-ai-enhanced/
 
 # How to use
-This repo will daily crawl arXiv papers about **cs.CV, cs.GR and cs.CL**, and use **DeepSeek** to summarize the papers in **Chinese**.
+This repo will daily crawl arXiv papers about **cs.AR**, and use **DeepSeek** to summarize the papers in **Chinese**.
 If you wish to crawl other arXiv categories, use other LLMs or other languages, please follow the bellow instructions.
 Otherwise, you can directly use this repo in https://dw-dengwei.github.io/daily-arXiv-ai-enhanced/ . Please star it if you like :)
 
@@ -15,7 +15,7 @@ Otherwise, you can directly use this repo in https://dw-dengwei.github.io/daily-
 4. Create two repository secrets named `OPENAI_API_KEY` and `OPENAI_BASE_URL`, and input corresponding values.
 5. Go to Variables. Variables are shown as plain text and are used for non-sensitive data
 6. Create the following repository variables:
-   1. `CATEGORIES`: separate the categories with ",", such as "cs.CL, cs.CV"
+   1. `CATEGORIES`: separate the categories with ",", such as "cs.AR"
    2. `LANGUAGE`: such as "Chinese" or "English"
    3. `MODEL_NAME`: such as "deepseek-chat"
    4. `EMAIL`: your email for push to github
@@ -25,6 +25,20 @@ Otherwise, you can directly use this repo in https://dw-dengwei.github.io/daily-
 By default, this action will automatically run every day
 You can modify it in `.github/workflows/run.yml`
 9. If you wish to modify the content in `README.md`, do not directly edit README.md. You should edit `template.md`.
+
+## Local deployment (optional)
+1. Install Python 3.12 and [uv](https://astral.sh/uv/), then run `uv sync`.
+2. Export environment variables in your shell (or create a `.env` file and `source` it) before running:
+   - `OPENAI_API_KEY` (required for AI enhancement)
+   - `OPENAI_BASE_URL` (optional)
+   - `MODEL_NAME` (optional, default in `run.sh`)
+   - `LANGUAGE` (optional)
+   - `CATEGORIES=cs.AR`
+3. Run `bash run.sh` from the repository root.
+
+**Where to change API settings**
+- **GitHub Actions**: set `OPENAI_API_KEY` and `OPENAI_BASE_URL` in **Settings → Secrets and variables → Actions → Secrets**.
+- **Local**: export `OPENAI_API_KEY` / `OPENAI_BASE_URL` in your shell (or `.env` + `source`), and set `MODEL_NAME` in env if you want a different model.
 
 # To-do list
 - [x] Replace markdown with GitHub pages front-end.
